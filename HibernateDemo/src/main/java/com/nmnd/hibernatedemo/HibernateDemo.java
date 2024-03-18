@@ -4,7 +4,8 @@
 
 package com.nmnd.hibernatedemo;
 
-import com.nmnd.pojo.Category;
+//import com.nmnd.pojo.Category;
+import com.nmnd.pojo.Product;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -17,10 +18,10 @@ public class HibernateDemo {
 
     public static void main(String[] args) {
         try (Session s = HibernateUtils.getFactory().openSession()) {
-            Query q = s.createQuery("FROM Category");
-            List<Category> cates = q.getResultList();
+            Query q = s.createNamedQuery("Product.findAll");
             
-            cates.forEach(c -> System.out.println(c.getName()));
+            List<Product> products = q.getResultList();
+            products.forEach(p -> System.out.println(p.getName()));
             
         }
     }
